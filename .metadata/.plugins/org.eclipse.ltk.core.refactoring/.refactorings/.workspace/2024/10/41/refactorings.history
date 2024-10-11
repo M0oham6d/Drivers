@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;AVR_ATmega32_Drivers&apos; to &apos;Drivers&apos;" description="Rename resource &apos;AVR_ATmega32_Drivers&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/AVR_ATmega32_Drivers" name="Drivers" stamp="1728634939519" updateReferences="true"/>
+</session>

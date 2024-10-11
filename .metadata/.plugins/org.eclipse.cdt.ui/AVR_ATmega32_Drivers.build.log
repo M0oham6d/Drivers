@@ -1,0 +1,57 @@
+11:20:26 **** Incremental Build of configuration Debug for project AVR_ATmega32_Drivers ****
+make all 
+Building file: ../timer0.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"timer0.d" -MT"timer0.o" -c -o "timer0.o" "../timer0.c"
+Finished building: ../timer0.c
+ 
+Building target: libAVR_ATmega32_Drivers.a
+Invoking: AVR Archiver
+avr-ar -r  "libAVR_ATmega32_Drivers.a"  ./adc.o ./gpio.o ./timer0.o  
+c:\WinAVR-20100110\bin\avr-ar.exe: creating libAVR_ATmega32_Drivers.a
+Finished building target: libAVR_ATmega32_Drivers.a
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S libAVR_ATmega32_Drivers.a  >"libAVR_ATmega32_Drivers.lss"
+Finished building: libAVR_ATmega32_Drivers.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 libAVR_ATmega32_Drivers.a
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+11:20:27 Build Finished. 0 errors, 0 warnings. (took 838ms)
+

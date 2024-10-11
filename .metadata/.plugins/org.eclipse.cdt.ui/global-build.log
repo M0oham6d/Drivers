@@ -1,0 +1,677 @@
+11:17:17 **** Build of configuration Debug for project AVR_ATmega32_Drivers ****
+make all 
+Building file: ../adc.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"adc.d" -MT"adc.o" -c -o "adc.o" "../adc.c"
+In file included from ../adc.c:7:
+../adc.h:11:46: error: ../Standard_Types/standard_types.h: No such file or directory
+../adc.h:12:44: error: ../Common_Macros/common_macros.h: No such file or directory
+In file included from ../adc.c:7:
+../adc.h:34: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'ADC_readChannel'
+../adc.c:43: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'ADC_readChannel'
+make: *** [adc.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+11:18:17 **** Incremental Build of configuration Debug for project AVR_ATmega32_Drivers ****
+make all 
+Building file: ../adc.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"adc.d" -MT"adc.o" -c -o "adc.o" "../adc.c"
+In file included from ../adc.c:7:
+../adc.h:11:46: error: ../Standard_Types/standard_types.h: No such file or directory
+../adc.h:12:44: error: ../Common_Macros/common_macros.h: No such file or directory
+In file included from ../adc.c:7:
+../adc.h:34: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'ADC_readChannel'
+../adc.c:43: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'ADC_readChannel'
+make: *** [adc.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+11:18:35 **** Incremental Build of configuration Debug for project AVR_ATmega32_Drivers ****
+make all 
+Building file: ../adc.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"adc.d" -MT"adc.o" -c -o "adc.o" "../adc.c"
+In file included from ../adc.c:7:
+../adc.h:11:46: error: ../Standard_Types/standard_types.h: No such file or directory
+../adc.h:12:44: error: ../Common_Macros/common_macros.h: No such file or directory
+In file included from ../adc.c:7:
+../adc.h:34: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'ADC_readChannel'
+../adc.c:44: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'ADC_readChannel'
+make: *** [adc.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+11:18:44 **** Incremental Build of configuration Debug for project AVR_ATmega32_Drivers ****
+make all 
+Building file: ../adc.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"adc.d" -MT"adc.o" -c -o "adc.o" "../adc.c"
+In file included from ../adc.c:7:
+../adc.h:32: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'ADC_readChannel'
+../adc.c:8:46: error: ../Standard_Types/standard_types.h: No such file or directory
+../adc.c:9:44: error: ../Common_Macros/common_macros.h: No such file or directory
+../adc.c:44: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'ADC_readChannel'
+make: *** [adc.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+11:19:00 **** Incremental Build of configuration Debug for project AVR_ATmega32_Drivers ****
+make all 
+Building file: ../adc.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"adc.d" -MT"adc.o" -c -o "adc.o" "../adc.c"
+In file included from ../adc.c:7:
+../adc.h:11:46: error: ../Standard_Types/standard_types.h: No such file or directory
+../adc.h:12:44: error: ../Common_Macros/common_macros.h: No such file or directory
+In file included from ../adc.c:7:
+../adc.h:34: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'ADC_readChannel'
+../adc.c:43: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'ADC_readChannel'
+make: *** [adc.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+11:20:05 **** Incremental Build of configuration Debug for project AVR_ATmega32_Drivers ****
+make all 
+Building file: ../adc.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"adc.d" -MT"adc.o" -c -o "adc.o" "../adc.c"
+Finished building: ../adc.c
+ 
+Building file: ../gpio.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"gpio.d" -MT"gpio.o" -c -o "gpio.o" "../gpio.c"
+In file included from ../gpio.c:8:
+../gpio.h:11:46: error: ../Standard_Types/standard_types.h: No such file or directory
+../gpio.h:12:44: error: ../Common_Macros/common_macros.h: No such file or directory
+In file included from ../gpio.c:8:
+../gpio.h:55: error: expected ')' before 'port_num'
+../gpio.h:63: error: expected ')' before 'port_num'
+../gpio.h:70: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'GPIO_readPin'
+../gpio.h:79: error: expected ')' before 'port_num'
+../gpio.h:88: error: expected ')' before 'port_num'
+../gpio.h:95: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'GPIO_readPort'
+../gpio.c:18: error: expected ')' before 'port_num'
+../gpio.c:84: error: expected ')' before 'port_num'
+../gpio.c:149: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'GPIO_readPin'
+../gpio.c:220: error: expected ')' before 'port_num'
+../gpio.c:258: error: expected ')' before 'port_num'
+../gpio.c:294: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'GPIO_readPort'
+make: *** [gpio.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+11:20:19 **** Incremental Build of configuration Debug for project AVR_ATmega32_Drivers ****
+make all 
+Building file: ../gpio.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"gpio.d" -MT"gpio.o" -c -o "gpio.o" "../gpio.c"
+Finished building: ../gpio.c
+ 
+Building file: ../timer0.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"timer0.d" -MT"timer0.o" -c -o "timer0.o" "../timer0.c"
+In file included from ../timer0.c:7:
+../timer0.h:11:46: error: ../Standard_Types/standard_types.h: No such file or directory
+In file included from ../timer0.c:7:
+../timer0.h:26: error: expected ')' before 'duty_cycle'
+../timer0.c:17: error: expected ')' before 'duty_cycle'
+make: *** [timer0.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+11:20:26 **** Incremental Build of configuration Debug for project AVR_ATmega32_Drivers ****
+make all 
+Building file: ../timer0.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"timer0.d" -MT"timer0.o" -c -o "timer0.o" "../timer0.c"
+Finished building: ../timer0.c
+ 
+Building target: libAVR_ATmega32_Drivers.a
+Invoking: AVR Archiver
+avr-ar -r  "libAVR_ATmega32_Drivers.a"  ./adc.o ./gpio.o ./timer0.o  
+c:\WinAVR-20100110\bin\avr-ar.exe: creating libAVR_ATmega32_Drivers.a
+Finished building target: libAVR_ATmega32_Drivers.a
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S libAVR_ATmega32_Drivers.a  >"libAVR_ATmega32_Drivers.lss"
+Finished building: libAVR_ATmega32_Drivers.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 libAVR_ATmega32_Drivers.a
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+11:22:25 **** Clean-only build of configuration Debug for project Drivers ****
+make clean 
+rm -f  ./adc.o ./gpio.o ./timer0.o  sizedummy  libAVR_ATmega32_Drivers.lss  ./adc.d ./gpio.d ./timer0.d  libAVR_ATmega32_Drivers.a
+ 
+11:22:25 **** Build of configuration Debug for project Drivers ****
+make all 
+Building file: ../adc.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"adc.d" -MT"adc.o" -c -o "adc.o" "../adc.c"
+Finished building: ../adc.c
+ 
+Building file: ../gpio.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"gpio.d" -MT"gpio.o" -c -o "gpio.o" "../gpio.c"
+Finished building: ../gpio.c
+ 
+Building file: ../timer0.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"timer0.d" -MT"timer0.o" -c -o "timer0.o" "../timer0.c"
+Finished building: ../timer0.c
+ 
+Building target: libDrivers.a
+Invoking: AVR Archiver
+avr-ar -r  "libDrivers.a"  ./adc.o ./gpio.o ./timer0.o  
+c:\WinAVR-20100110\bin\avr-ar.exe: creating libDrivers.a
+Finished building target: libDrivers.a
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S libDrivers.a  >"libDrivers.lss"
+Finished building: libDrivers.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 libDrivers.a
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+11:23:28 **** Incremental Build of configuration Debug for project Drivers ****
+make all 
+Building file: ../MCAL/adc.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"MCAL/adc.d" -MT"MCAL/adc.o" -c -o "MCAL/adc.o" "../MCAL/adc.c"
+../MCAL/adc.c:7:22: error: MCAL/adc.h: No such file or directory
+../MCAL/adc.c: In function 'ADC_init':
+../MCAL/adc.c:26: error: 'ADMUX' undeclared (first use in this function)
+../MCAL/adc.c:26: error: (Each undeclared identifier is reported only once
+../MCAL/adc.c:26: error: for each function it appears in.)
+../MCAL/adc.c:26: error: 'REFS0' undeclared (first use in this function)
+../MCAL/adc.c:26: error: 'REFS1' undeclared (first use in this function)
+../MCAL/adc.c:34: error: 'ADCSRA' undeclared (first use in this function)
+../MCAL/adc.c:34: error: 'ADEN' undeclared (first use in this function)
+../MCAL/adc.c:34: error: 'ADPS2' undeclared (first use in this function)
+../MCAL/adc.c:34: error: 'ADPS1' undeclared (first use in this function)
+../MCAL/adc.c:34: error: 'ADPS0' undeclared (first use in this function)
+../MCAL/adc.c: At top level:
+../MCAL/adc.c:43: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'ADC_readChannel'
+make: *** [MCAL/adc.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+11:23:36 **** Incremental Build of configuration Debug for project Drivers ****
+make all 
+Building file: ../MCAL/adc.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"MCAL/adc.d" -MT"MCAL/adc.o" -c -o "MCAL/adc.o" "../MCAL/adc.c"
+In file included from ../MCAL/adc.c:7:
+../MCAL/adc.h:11:43: error: Standard_Types/standard_types.h: No such file or directory
+../MCAL/adc.h:12:41: error: Common_Macros/common_macros.h: No such file or directory
+In file included from ../MCAL/adc.c:7:
+../MCAL/adc.h:34: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'ADC_readChannel'
+../MCAL/adc.c:43: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'ADC_readChannel'
+make: *** [MCAL/adc.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+11:23:54 **** Incremental Build of configuration Debug for project Drivers ****
+make all 
+Building file: ../MCAL/adc.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"MCAL/adc.d" -MT"MCAL/adc.o" -c -o "MCAL/adc.o" "../MCAL/adc.c"
+Finished building: ../MCAL/adc.c
+ 
+Building file: ../MCAL/gpio.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"MCAL/gpio.d" -MT"MCAL/gpio.o" -c -o "MCAL/gpio.o" "../MCAL/gpio.c"
+../MCAL/gpio.c:8:23: error: MCAL/gpio.h: No such file or directory
+../MCAL/gpio.c:18: error: expected ')' before 'port_num'
+../MCAL/gpio.c:84: error: expected ')' before 'port_num'
+../MCAL/gpio.c:149: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'GPIO_readPin'
+../MCAL/gpio.c:220: error: expected ')' before 'port_num'
+../MCAL/gpio.c:258: error: expected ')' before 'port_num'
+../MCAL/gpio.c:294: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'GPIO_readPort'
+make: *** [MCAL/gpio.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+11:24:27 **** Incremental Build of configuration Debug for project Drivers ****
+make all 
+Building file: ../MCAL/gpio.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"MCAL/gpio.d" -MT"MCAL/gpio.o" -c -o "MCAL/gpio.o" "../MCAL/gpio.c"
+Finished building: ../MCAL/gpio.c
+ 
+Building file: ../MCAL/timer0.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"MCAL/timer0.d" -MT"MCAL/timer0.o" -c -o "MCAL/timer0.o" "../MCAL/timer0.c"
+Finished building: ../MCAL/timer0.c
+ 
+Building target: libDrivers.a
+Invoking: AVR Archiver
+avr-ar -r  "libDrivers.a"  ./MCAL/adc.o ./MCAL/gpio.o ./MCAL/timer0.o  
+c:\WinAVR-20100110\bin\avr-ar.exe: creating libDrivers.a
+Finished building target: libDrivers.a
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S libDrivers.a  >"libDrivers.lss"
+Finished building: libDrivers.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 libDrivers.a
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+11:25:00 **** Incremental Build of configuration Debug for project Drivers ****
+make all 
+Building file: ../MCAL/gpio.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"MCAL/gpio.d" -MT"MCAL/gpio.o" -c -o "MCAL/gpio.o" "../MCAL/gpio.c"
+Finished building: ../MCAL/gpio.c
+ 
+Building target: libDrivers.a
+Invoking: AVR Archiver
+avr-ar -r  "libDrivers.a"  ./MCAL/adc.o ./MCAL/gpio.o ./MCAL/timer0.o  
+c:\WinAVR-20100110\bin\avr-ar.exe: creating libDrivers.a
+Finished building target: libDrivers.a
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S libDrivers.a  >"libDrivers.lss"
+Finished building: libDrivers.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 libDrivers.a
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+11:29:15 **** Incremental Build of configuration Debug for project Drivers ****
+make all 
+Building file: ../HAL/buzzer.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"HAL/buzzer.d" -MT"HAL/buzzer.o" -c -o "HAL/buzzer.o" "../HAL/buzzer.c"
+Finished building: ../HAL/buzzer.c
+ 
+Building file: ../HAL/flame_sensor.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"HAL/flame_sensor.d" -MT"HAL/flame_sensor.o" -c -o "HAL/flame_sensor.o" "../HAL/flame_sensor.c"
+Finished building: ../HAL/flame_sensor.c
+ 
+Building file: ../HAL/lcd.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"HAL/lcd.d" -MT"HAL/lcd.o" -c -o "HAL/lcd.o" "../HAL/lcd.c"
+In file included from ../HAL/lcd.h:11,
+                 from ../HAL/lcd.c:7:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../HAL/lcd.c
+ 
+Building file: ../HAL/ldr_sensor.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"HAL/ldr_sensor.d" -MT"HAL/ldr_sensor.o" -c -o "HAL/ldr_sensor.o" "../HAL/ldr_sensor.c"
+Finished building: ../HAL/ldr_sensor.c
+ 
+Building file: ../HAL/leds.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"HAL/leds.d" -MT"HAL/leds.o" -c -o "HAL/leds.o" "../HAL/leds.c"
+Finished building: ../HAL/leds.c
+ 
+Building file: ../HAL/lm35_sensor.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"HAL/lm35_sensor.d" -MT"HAL/lm35_sensor.o" -c -o "HAL/lm35_sensor.o" "../HAL/lm35_sensor.c"
+Finished building: ../HAL/lm35_sensor.c
+ 
+Building file: ../HAL/motor.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"HAL/motor.d" -MT"HAL/motor.o" -c -o "HAL/motor.o" "../HAL/motor.c"
+Finished building: ../HAL/motor.c
+ 
+Building target: libDrivers.a
+Invoking: AVR Archiver
+avr-ar -r  "libDrivers.a"  ./MCAL/adc.o ./MCAL/gpio.o ./MCAL/timer0.o  ./HAL/buzzer.o ./HAL/flame_sensor.o ./HAL/lcd.o ./HAL/ldr_sensor.o ./HAL/leds.o ./HAL/lm35_sensor.o ./HAL/motor.o  
+c:\WinAVR-20100110\bin\avr-ar.exe: creating libDrivers.a
+Finished building target: libDrivers.a
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S libDrivers.a  >"libDrivers.lss"
+Finished building: libDrivers.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 libDrivers.a
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+11:31:19 **** Incremental Build of configuration Debug for project Drivers ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 libDrivers.a
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
