@@ -10,7 +10,8 @@ C_SRCS += \
 ../HAL/ldr_sensor.c \
 ../HAL/leds.c \
 ../HAL/lm35_sensor.c \
-../HAL/motor.c 
+../HAL/motor.c \
+../HAL/ultrasonic_sensor.c 
 
 OBJS += \
 ./HAL/buzzer.o \
@@ -19,7 +20,8 @@ OBJS += \
 ./HAL/ldr_sensor.o \
 ./HAL/leds.o \
 ./HAL/lm35_sensor.o \
-./HAL/motor.o 
+./HAL/motor.o \
+./HAL/ultrasonic_sensor.o 
 
 C_DEPS += \
 ./HAL/buzzer.d \
@@ -28,7 +30,8 @@ C_DEPS += \
 ./HAL/ldr_sensor.d \
 ./HAL/leds.d \
 ./HAL/lm35_sensor.d \
-./HAL/motor.d 
+./HAL/motor.d \
+./HAL/ultrasonic_sensor.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
