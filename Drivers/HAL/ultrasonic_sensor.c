@@ -1,8 +1,8 @@
-/*
+/***************************************************************************************************************
  * ultrasonic_sensor.c
  * Author: Muhammed Ayman
  * Module: Ultrasonic Sensor
- */
+ **************************************************************************************************************/
 
 #include "ultrasonic_sensor.h"
 
@@ -22,6 +22,9 @@ static void Ultrasonic_edgeProcessing(void);
  *******************************************************************************/
 void Ultrasonic_init(void)
 {
+	/* Set up pin direction for trigger pin as output. */
+	GPIO_setupPinDirection(TRIGGER_PORT_CONNECTION, TRIGGER_PIN, PIN_OUTPUT);
+
 	/*
 	 * Set up ICU Configuration.
 	 * Initialize ICU.
@@ -30,8 +33,6 @@ void Ultrasonic_init(void)
 	ICU_ConfigType ICU_Configurations = {F_CPU_8, RAISING};
 	ICU_init(&ICU_Configurations);
 	ICU_setCallBack(Ultrasonic_edgeProcessing);
-	/* Set up pin direction for trigger pin as output. */
-	GPIO_setupPinDirection(TRIGGER_PORT_CONNECTION, TRIGGER_PIN, PIN_OUTPUT);
 }
 
 /*
@@ -62,7 +63,7 @@ uint16 Ultrasonic_readDistance(void)
 static void Ultrasonic_edgeProcessing(void)
 {
 	g_edgeTime++;
-	if(g_edgeTime == 1)
+	if(1 == g_edgeTime)
 	{
 		/*
 		 * Clear the timer counter register to start measurements from the

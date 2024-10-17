@@ -1662,6 +1662,409 @@ void PWM_Timer0_Start(uint8 duty_cycle)
   60:	df 91       	pop	r29
   62:	08 95       	ret
 
+uart.o:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  00000034  2**0
+                  ALLOC
+  3 .stab         00000600  00000000  00000000  00000034  2**2
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+  4 .stabstr      00000981  00000000  00000000  00000634  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .text.UART_init 000000c2  00000000  00000000  00000fb5  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  6 .text.UART_sendByte 0000002e  00000000  00000000  00001077  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  7 .text.UART_recieveByte 0000001e  00000000  00000000  000010a5  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  8 .text.UART_sendString 00000052  00000000  00000000  000010c3  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  9 .text.UART_receiveString 00000086  00000000  00000000  00001115  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+
+Disassembly of section .text.UART_init:
+
+00000000 <UART_init>:
+ * 1. Setup the Frame format like number of data bits, parity bit type and number of stop bits.
+ * 2. Enable the UART.
+ * 3. Setup the UART baud rate.
+ */
+void UART_init(const UART_ConfigType * UART_Configrations)
+{
+   0:	df 93       	push	r29
+   2:	cf 93       	push	r28
+   4:	00 d0       	rcall	.+0      	; 0x6 <UART_init+0x6>
+   6:	00 d0       	rcall	.+0      	; 0x8 <UART_init+0x8>
+   8:	cd b7       	in	r28, 0x3d	; 61
+   a:	de b7       	in	r29, 0x3e	; 62
+   c:	9c 83       	std	Y+4, r25	; 0x04
+   e:	8b 83       	std	Y+3, r24	; 0x03
+	uint16 ubrr_value = 0;
+  10:	1a 82       	std	Y+2, r1	; 0x02
+  12:	19 82       	std	Y+1, r1	; 0x01
+
+	/* U2X = 1 for double transmission speed */
+	UCSRA = (1<<U2X);
+  14:	eb e2       	ldi	r30, 0x2B	; 43
+  16:	f0 e0       	ldi	r31, 0x00	; 0
+  18:	82 e0       	ldi	r24, 0x02	; 2
+  1a:	80 83       	st	Z, r24
+	 * RXEN  = 1 Receiver Enable
+	 * RXEN  = 1 Transmitter Enable
+	 * UCSZ2 = 0 For 8-bit data mode
+	 * RXB8 & TXB8 not used for 8-bit data mode
+	 ***********************************************************************/ 
+	UCSRB = (1<<RXEN) | (1<<TXEN);
+  1c:	ea e2       	ldi	r30, 0x2A	; 42
+  1e:	f0 e0       	ldi	r31, 0x00	; 0
+  20:	88 e1       	ldi	r24, 0x18	; 24
+  22:	80 83       	st	Z, r24
+	 * UPM1:0  = 00 Disable parity bit, 10  Even Parity, 11  Odd Parity
+	 * USBS    = 0 One stop bit, 1 Two stop bit
+	 * UCSZ1:0 = 11 For 8-bit data mode
+	 * UCPOL   = 0 Used with the Synchronous operation only
+	 ***********************************************************************/ 	
+	UCSRC = (1<<URSEL) | (1<<UCSZ0) | (1<<UCSZ1) |
+  24:	a0 e4       	ldi	r26, 0x40	; 64
+  26:	b0 e0       	ldi	r27, 0x00	; 0
+  28:	eb 81       	ldd	r30, Y+3	; 0x03
+  2a:	fc 81       	ldd	r31, Y+4	; 0x04
+  2c:	84 81       	ldd	r24, Z+4	; 0x04
+  2e:	88 2f       	mov	r24, r24
+  30:	90 e0       	ldi	r25, 0x00	; 0
+  32:	82 95       	swap	r24
+  34:	92 95       	swap	r25
+  36:	90 7f       	andi	r25, 0xF0	; 240
+  38:	98 27       	eor	r25, r24
+  3a:	80 7f       	andi	r24, 0xF0	; 240
+  3c:	98 27       	eor	r25, r24
+  3e:	28 2f       	mov	r18, r24
+  40:	26 68       	ori	r18, 0x86	; 134
+  42:	eb 81       	ldd	r30, Y+3	; 0x03
+  44:	fc 81       	ldd	r31, Y+4	; 0x04
+  46:	85 81       	ldd	r24, Z+5	; 0x05
+  48:	88 2f       	mov	r24, r24
+  4a:	90 e0       	ldi	r25, 0x00	; 0
+  4c:	88 0f       	add	r24, r24
+  4e:	99 1f       	adc	r25, r25
+  50:	88 0f       	add	r24, r24
+  52:	99 1f       	adc	r25, r25
+  54:	88 0f       	add	r24, r24
+  56:	99 1f       	adc	r25, r25
+  58:	82 2b       	or	r24, r18
+  5a:	8c 93       	st	X, r24
+			((UART_Configrations->Parity_Configrations)<<UPM0) |
+			((UART_Configrations->StopBit_Configrations)<<USBS);
+	
+	/* Calculate the UBRR register value */
+	ubrr_value = (uint16)(((F_CPU / (UART_Configrations->buadRate * 8UL))) - 1);
+  5c:	eb 81       	ldd	r30, Y+3	; 0x03
+  5e:	fc 81       	ldd	r31, Y+4	; 0x04
+  60:	80 81       	ld	r24, Z
+  62:	91 81       	ldd	r25, Z+1	; 0x01
+  64:	a2 81       	ldd	r26, Z+2	; 0x02
+  66:	b3 81       	ldd	r27, Z+3	; 0x03
+  68:	88 0f       	add	r24, r24
+  6a:	99 1f       	adc	r25, r25
+  6c:	aa 1f       	adc	r26, r26
+  6e:	bb 1f       	adc	r27, r27
+  70:	88 0f       	add	r24, r24
+  72:	99 1f       	adc	r25, r25
+  74:	aa 1f       	adc	r26, r26
+  76:	bb 1f       	adc	r27, r27
+  78:	88 0f       	add	r24, r24
+  7a:	99 1f       	adc	r25, r25
+  7c:	aa 1f       	adc	r26, r26
+  7e:	bb 1f       	adc	r27, r27
+  80:	9c 01       	movw	r18, r24
+  82:	ad 01       	movw	r20, r26
+  84:	80 e0       	ldi	r24, 0x00	; 0
+  86:	94 e2       	ldi	r25, 0x24	; 36
+  88:	a4 ef       	ldi	r26, 0xF4	; 244
+  8a:	b0 e0       	ldi	r27, 0x00	; 0
+  8c:	bc 01       	movw	r22, r24
+  8e:	cd 01       	movw	r24, r26
+  90:	0e 94 00 00 	call	0	; 0x0 <UART_init>
+  94:	da 01       	movw	r26, r20
+  96:	c9 01       	movw	r24, r18
+  98:	01 97       	sbiw	r24, 0x01	; 1
+  9a:	9a 83       	std	Y+2, r25	; 0x02
+  9c:	89 83       	std	Y+1, r24	; 0x01
+
+	/* First 8 bits from the BAUD_PRESCALE inside UBRRL and last 4 bits in UBRRH */
+	UBRRH = ubrr_value>>8;
+  9e:	e0 e4       	ldi	r30, 0x40	; 64
+  a0:	f0 e0       	ldi	r31, 0x00	; 0
+  a2:	89 81       	ldd	r24, Y+1	; 0x01
+  a4:	9a 81       	ldd	r25, Y+2	; 0x02
+  a6:	89 2f       	mov	r24, r25
+  a8:	99 27       	eor	r25, r25
+  aa:	80 83       	st	Z, r24
+	UBRRL = ubrr_value;
+  ac:	e9 e2       	ldi	r30, 0x29	; 41
+  ae:	f0 e0       	ldi	r31, 0x00	; 0
+  b0:	89 81       	ldd	r24, Y+1	; 0x01
+  b2:	80 83       	st	Z, r24
+}
+  b4:	0f 90       	pop	r0
+  b6:	0f 90       	pop	r0
+  b8:	0f 90       	pop	r0
+  ba:	0f 90       	pop	r0
+  bc:	cf 91       	pop	r28
+  be:	df 91       	pop	r29
+  c0:	08 95       	ret
+
+Disassembly of section .text.UART_sendByte:
+
+00000000 <UART_sendByte>:
+ * 1. Setup the Frame format like number of data bits, parity bit type and number of stop bits.
+ * 2. Enable the UART.
+ * 3. Setup the UART baud rate.
+ */
+void UART_init(const UART_ConfigType * UART_Configrations)
+{
+   0:	df 93       	push	r29
+   2:	cf 93       	push	r28
+   4:	0f 92       	push	r0
+   6:	cd b7       	in	r28, 0x3d	; 61
+   8:	de b7       	in	r29, 0x3e	; 62
+   a:	89 83       	std	Y+1, r24	; 0x01
+   c:	eb e2       	ldi	r30, 0x2B	; 43
+   e:	f0 e0       	ldi	r31, 0x00	; 0
+	uint16 ubrr_value = 0;
+  10:	80 81       	ld	r24, Z
+  12:	88 2f       	mov	r24, r24
+
+	/* U2X = 1 for double transmission speed */
+	UCSRA = (1<<U2X);
+  14:	90 e0       	ldi	r25, 0x00	; 0
+  16:	80 72       	andi	r24, 0x20	; 32
+  18:	90 70       	andi	r25, 0x00	; 0
+  1a:	00 97       	sbiw	r24, 0x00	; 0
+	 * RXEN  = 1 Receiver Enable
+	 * RXEN  = 1 Transmitter Enable
+	 * UCSZ2 = 0 For 8-bit data mode
+	 * RXB8 & TXB8 not used for 8-bit data mode
+	 ***********************************************************************/ 
+	UCSRB = (1<<RXEN) | (1<<TXEN);
+  1c:	01 f0       	breq	.+0      	; 0x1e <UART_sendByte+0x1e>
+  1e:	ec e2       	ldi	r30, 0x2C	; 44
+  20:	f0 e0       	ldi	r31, 0x00	; 0
+  22:	89 81       	ldd	r24, Y+1	; 0x01
+	 * UPM1:0  = 00 Disable parity bit, 10  Even Parity, 11  Odd Parity
+	 * USBS    = 0 One stop bit, 1 Two stop bit
+	 * UCSZ1:0 = 11 For 8-bit data mode
+	 * UCPOL   = 0 Used with the Synchronous operation only
+	 ***********************************************************************/ 	
+	UCSRC = (1<<URSEL) | (1<<UCSZ0) | (1<<UCSZ1) |
+  24:	80 83       	st	Z, r24
+  26:	0f 90       	pop	r0
+  28:	cf 91       	pop	r28
+  2a:	df 91       	pop	r29
+  2c:	08 95       	ret
+
+Disassembly of section .text.UART_recieveByte:
+
+00000000 <UART_recieveByte>:
+ * 1. Setup the Frame format like number of data bits, parity bit type and number of stop bits.
+ * 2. Enable the UART.
+ * 3. Setup the UART baud rate.
+ */
+void UART_init(const UART_ConfigType * UART_Configrations)
+{
+   0:	df 93       	push	r29
+   2:	cf 93       	push	r28
+   4:	cd b7       	in	r28, 0x3d	; 61
+   6:	de b7       	in	r29, 0x3e	; 62
+   8:	eb e2       	ldi	r30, 0x2B	; 43
+   a:	f0 e0       	ldi	r31, 0x00	; 0
+   c:	80 81       	ld	r24, Z
+   e:	88 23       	and	r24, r24
+	uint16 ubrr_value = 0;
+  10:	04 f4       	brge	.+0      	; 0x12 <UART_recieveByte+0x12>
+  12:	ec e2       	ldi	r30, 0x2C	; 44
+
+	/* U2X = 1 for double transmission speed */
+	UCSRA = (1<<U2X);
+  14:	f0 e0       	ldi	r31, 0x00	; 0
+  16:	80 81       	ld	r24, Z
+  18:	cf 91       	pop	r28
+  1a:	df 91       	pop	r29
+	 * RXEN  = 1 Receiver Enable
+	 * RXEN  = 1 Transmitter Enable
+	 * UCSZ2 = 0 For 8-bit data mode
+	 * RXB8 & TXB8 not used for 8-bit data mode
+	 ***********************************************************************/ 
+	UCSRB = (1<<RXEN) | (1<<TXEN);
+  1c:	08 95       	ret
+
+Disassembly of section .text.UART_sendString:
+
+00000000 <UART_sendString>:
+ * 1. Setup the Frame format like number of data bits, parity bit type and number of stop bits.
+ * 2. Enable the UART.
+ * 3. Setup the UART baud rate.
+ */
+void UART_init(const UART_ConfigType * UART_Configrations)
+{
+   0:	df 93       	push	r29
+   2:	cf 93       	push	r28
+   4:	00 d0       	rcall	.+0      	; 0x6 <UART_sendString+0x6>
+   6:	0f 92       	push	r0
+   8:	cd b7       	in	r28, 0x3d	; 61
+   a:	de b7       	in	r29, 0x3e	; 62
+   c:	9b 83       	std	Y+3, r25	; 0x03
+   e:	8a 83       	std	Y+2, r24	; 0x02
+	uint16 ubrr_value = 0;
+  10:	19 82       	std	Y+1, r1	; 0x01
+  12:	00 c0       	rjmp	.+0      	; 0x14 <UART_sendString+0x14>
+
+	/* U2X = 1 for double transmission speed */
+	UCSRA = (1<<U2X);
+  14:	89 81       	ldd	r24, Y+1	; 0x01
+  16:	28 2f       	mov	r18, r24
+  18:	30 e0       	ldi	r19, 0x00	; 0
+  1a:	8a 81       	ldd	r24, Y+2	; 0x02
+	 * RXEN  = 1 Receiver Enable
+	 * RXEN  = 1 Transmitter Enable
+	 * UCSZ2 = 0 For 8-bit data mode
+	 * RXB8 & TXB8 not used for 8-bit data mode
+	 ***********************************************************************/ 
+	UCSRB = (1<<RXEN) | (1<<TXEN);
+  1c:	9b 81       	ldd	r25, Y+3	; 0x03
+  1e:	fc 01       	movw	r30, r24
+  20:	e2 0f       	add	r30, r18
+  22:	f3 1f       	adc	r31, r19
+	 * UPM1:0  = 00 Disable parity bit, 10  Even Parity, 11  Odd Parity
+	 * USBS    = 0 One stop bit, 1 Two stop bit
+	 * UCSZ1:0 = 11 For 8-bit data mode
+	 * UCPOL   = 0 Used with the Synchronous operation only
+	 ***********************************************************************/ 	
+	UCSRC = (1<<URSEL) | (1<<UCSZ0) | (1<<UCSZ1) |
+  24:	80 81       	ld	r24, Z
+  26:	0e 94 00 00 	call	0	; 0x0 <UART_sendString>
+  2a:	89 81       	ldd	r24, Y+1	; 0x01
+  2c:	8f 5f       	subi	r24, 0xFF	; 255
+  2e:	89 83       	std	Y+1, r24	; 0x01
+  30:	89 81       	ldd	r24, Y+1	; 0x01
+  32:	28 2f       	mov	r18, r24
+  34:	30 e0       	ldi	r19, 0x00	; 0
+  36:	8a 81       	ldd	r24, Y+2	; 0x02
+  38:	9b 81       	ldd	r25, Y+3	; 0x03
+  3a:	fc 01       	movw	r30, r24
+  3c:	e2 0f       	add	r30, r18
+  3e:	f3 1f       	adc	r31, r19
+  40:	80 81       	ld	r24, Z
+  42:	88 23       	and	r24, r24
+  44:	01 f4       	brne	.+0      	; 0x46 <UART_sendString+0x46>
+  46:	0f 90       	pop	r0
+  48:	0f 90       	pop	r0
+  4a:	0f 90       	pop	r0
+  4c:	cf 91       	pop	r28
+  4e:	df 91       	pop	r29
+  50:	08 95       	ret
+
+Disassembly of section .text.UART_receiveString:
+
+00000000 <UART_receiveString>:
+ * 1. Setup the Frame format like number of data bits, parity bit type and number of stop bits.
+ * 2. Enable the UART.
+ * 3. Setup the UART baud rate.
+ */
+void UART_init(const UART_ConfigType * UART_Configrations)
+{
+   0:	0f 93       	push	r16
+   2:	1f 93       	push	r17
+   4:	df 93       	push	r29
+   6:	cf 93       	push	r28
+   8:	00 d0       	rcall	.+0      	; 0xa <UART_receiveString+0xa>
+   a:	0f 92       	push	r0
+   c:	cd b7       	in	r28, 0x3d	; 61
+   e:	de b7       	in	r29, 0x3e	; 62
+	uint16 ubrr_value = 0;
+  10:	9b 83       	std	Y+3, r25	; 0x03
+  12:	8a 83       	std	Y+2, r24	; 0x02
+
+	/* U2X = 1 for double transmission speed */
+	UCSRA = (1<<U2X);
+  14:	19 82       	std	Y+1, r1	; 0x01
+  16:	89 81       	ldd	r24, Y+1	; 0x01
+  18:	28 2f       	mov	r18, r24
+  1a:	30 e0       	ldi	r19, 0x00	; 0
+	 * RXEN  = 1 Receiver Enable
+	 * RXEN  = 1 Transmitter Enable
+	 * UCSZ2 = 0 For 8-bit data mode
+	 * RXB8 & TXB8 not used for 8-bit data mode
+	 ***********************************************************************/ 
+	UCSRB = (1<<RXEN) | (1<<TXEN);
+  1c:	8a 81       	ldd	r24, Y+2	; 0x02
+  1e:	9b 81       	ldd	r25, Y+3	; 0x03
+  20:	8c 01       	movw	r16, r24
+  22:	02 0f       	add	r16, r18
+	 * UPM1:0  = 00 Disable parity bit, 10  Even Parity, 11  Odd Parity
+	 * USBS    = 0 One stop bit, 1 Two stop bit
+	 * UCSZ1:0 = 11 For 8-bit data mode
+	 * UCPOL   = 0 Used with the Synchronous operation only
+	 ***********************************************************************/ 	
+	UCSRC = (1<<URSEL) | (1<<UCSZ0) | (1<<UCSZ1) |
+  24:	13 1f       	adc	r17, r19
+  26:	0e 94 00 00 	call	0	; 0x0 <UART_receiveString>
+  2a:	f8 01       	movw	r30, r16
+  2c:	80 83       	st	Z, r24
+  2e:	00 c0       	rjmp	.+0      	; 0x30 <UART_receiveString+0x30>
+  30:	89 81       	ldd	r24, Y+1	; 0x01
+  32:	8f 5f       	subi	r24, 0xFF	; 255
+  34:	89 83       	std	Y+1, r24	; 0x01
+  36:	89 81       	ldd	r24, Y+1	; 0x01
+  38:	28 2f       	mov	r18, r24
+  3a:	30 e0       	ldi	r19, 0x00	; 0
+  3c:	8a 81       	ldd	r24, Y+2	; 0x02
+  3e:	9b 81       	ldd	r25, Y+3	; 0x03
+  40:	8c 01       	movw	r16, r24
+  42:	02 0f       	add	r16, r18
+  44:	13 1f       	adc	r17, r19
+  46:	0e 94 00 00 	call	0	; 0x0 <UART_receiveString>
+  4a:	f8 01       	movw	r30, r16
+  4c:	80 83       	st	Z, r24
+  4e:	89 81       	ldd	r24, Y+1	; 0x01
+  50:	28 2f       	mov	r18, r24
+  52:	30 e0       	ldi	r19, 0x00	; 0
+  54:	8a 81       	ldd	r24, Y+2	; 0x02
+  56:	9b 81       	ldd	r25, Y+3	; 0x03
+  58:	fc 01       	movw	r30, r24
+  5a:	e2 0f       	add	r30, r18
+			((UART_Configrations->Parity_Configrations)<<UPM0) |
+			((UART_Configrations->StopBit_Configrations)<<USBS);
+	
+	/* Calculate the UBRR register value */
+	ubrr_value = (uint16)(((F_CPU / (UART_Configrations->buadRate * 8UL))) - 1);
+  5c:	f3 1f       	adc	r31, r19
+  5e:	80 81       	ld	r24, Z
+  60:	83 32       	cpi	r24, 0x23	; 35
+  62:	01 f4       	brne	.+0      	; 0x64 <UART_receiveString+0x64>
+  64:	89 81       	ldd	r24, Y+1	; 0x01
+  66:	28 2f       	mov	r18, r24
+  68:	30 e0       	ldi	r19, 0x00	; 0
+  6a:	8a 81       	ldd	r24, Y+2	; 0x02
+  6c:	9b 81       	ldd	r25, Y+3	; 0x03
+  6e:	fc 01       	movw	r30, r24
+  70:	e2 0f       	add	r30, r18
+  72:	f3 1f       	adc	r31, r19
+  74:	10 82       	st	Z, r1
+  76:	0f 90       	pop	r0
+  78:	0f 90       	pop	r0
+  7a:	0f 90       	pop	r0
+  7c:	cf 91       	pop	r28
+  7e:	df 91       	pop	r29
+  80:	1f 91       	pop	r17
+  82:	0f 91       	pop	r16
+  84:	08 95       	ret
+
 buzzer.o:     file format elf32-avr
 
 Sections:
@@ -3307,222 +3710,6 @@ uint16 LDR_getLightIntensity(void)
   96:	df 91       	pop	r29
   98:	08 95       	ret
 
-leds.o:     file format elf32-avr
-
-Sections:
-Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000000  00000000  00000000  00000034  2**0
-                  CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00000000  00000000  00000034  2**0
-                  CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000000  00000000  00000000  00000034  2**0
-                  ALLOC
-  3 .stab         00000504  00000000  00000000  00000034  2**2
-                  CONTENTS, RELOC, READONLY, DEBUGGING
-  4 .stabstr      000008a6  00000000  00000000  00000538  2**0
-                  CONTENTS, READONLY, DEBUGGING
-  5 .text.LEDS_init 0000004a  00000000  00000000  00000dde  2**0
-                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
-  6 .text.LED_on  00000062  00000000  00000000  00000e28  2**0
-                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
-  7 .text.LED_off 00000062  00000000  00000000  00000e8a  2**0
-                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
-
-Disassembly of section .text.LEDS_init:
-
-00000000 <LEDS_init>:
- * Make all of them output pins.
- * If the connection is POSITIVE LOGIC, put logic zero at the beginning.
- * Else, put logic one at the beginning (NEGATIVE LOGIC CONNECTION).
- */
-void LEDS_init(void)
-{
-   0:	df 93       	push	r29
-   2:	cf 93       	push	r28
-   4:	cd b7       	in	r28, 0x3d	; 61
-   6:	de b7       	in	r29, 0x3e	; 62
-	GPIO_setupPinDirection(LEDS_PORT_CONNECTION, RED_LED, PIN_OUTPUT);
-   8:	81 e0       	ldi	r24, 0x01	; 1
-   a:	65 e0       	ldi	r22, 0x05	; 5
-   c:	41 e0       	ldi	r20, 0x01	; 1
-   e:	0e 94 00 00 	call	0	; 0x0 <LEDS_init>
-	GPIO_setupPinDirection(LEDS_PORT_CONNECTION, GREEN_LED, PIN_OUTPUT);
-  12:	81 e0       	ldi	r24, 0x01	; 1
-  14:	66 e0       	ldi	r22, 0x06	; 6
-  16:	41 e0       	ldi	r20, 0x01	; 1
-  18:	0e 94 00 00 	call	0	; 0x0 <LEDS_init>
-	GPIO_setupPinDirection(LEDS_PORT_CONNECTION, BLUE_LED, PIN_OUTPUT);
-  1c:	81 e0       	ldi	r24, 0x01	; 1
-  1e:	67 e0       	ldi	r22, 0x07	; 7
-  20:	41 e0       	ldi	r20, 0x01	; 1
-  22:	0e 94 00 00 	call	0	; 0x0 <LEDS_init>
-
-#ifdef CONNECTION_POSITIVE_LOGIC
-	GPIO_writePin(LEDS_PORT_CONNECTION, RED_LED, LOGIC_LOW);
-  26:	81 e0       	ldi	r24, 0x01	; 1
-  28:	65 e0       	ldi	r22, 0x05	; 5
-  2a:	40 e0       	ldi	r20, 0x00	; 0
-  2c:	0e 94 00 00 	call	0	; 0x0 <LEDS_init>
-	GPIO_writePin(LEDS_PORT_CONNECTION, GREEN_LED, LOGIC_LOW);
-  30:	81 e0       	ldi	r24, 0x01	; 1
-  32:	66 e0       	ldi	r22, 0x06	; 6
-  34:	40 e0       	ldi	r20, 0x00	; 0
-  36:	0e 94 00 00 	call	0	; 0x0 <LEDS_init>
-	GPIO_writePin(LEDS_PORT_CONNECTION, BLUE_LED, LOGIC_LOW);
-  3a:	81 e0       	ldi	r24, 0x01	; 1
-  3c:	67 e0       	ldi	r22, 0x07	; 7
-  3e:	40 e0       	ldi	r20, 0x00	; 0
-  40:	0e 94 00 00 	call	0	; 0x0 <LEDS_init>
-#else
-	GPIO_writePin(LEDS_PORT_CONNECTION, RED_LED, LOGIC_HIGH);
-	GPIO_writePin(LEDS_PORT_CONNECTION, GREEN_LED, LOGIC_HIGH);
-	GPIO_writePin(LEDS_PORT_CONNECTION, BLUE_LED, LOGIC_HIGH);
-#endif
-}
-  44:	cf 91       	pop	r28
-  46:	df 91       	pop	r29
-  48:	08 95       	ret
-
-Disassembly of section .text.LED_on:
-
-00000000 <LED_on>:
- * Make all of them output pins.
- * If the connection is POSITIVE LOGIC, put logic zero at the beginning.
- * Else, put logic one at the beginning (NEGATIVE LOGIC CONNECTION).
- */
-void LEDS_init(void)
-{
-   0:	df 93       	push	r29
-   2:	cf 93       	push	r28
-   4:	00 d0       	rcall	.+0      	; 0x6 <LED_on+0x6>
-   6:	0f 92       	push	r0
-	GPIO_setupPinDirection(LEDS_PORT_CONNECTION, RED_LED, PIN_OUTPUT);
-   8:	cd b7       	in	r28, 0x3d	; 61
-   a:	de b7       	in	r29, 0x3e	; 62
-   c:	89 83       	std	Y+1, r24	; 0x01
-   e:	89 81       	ldd	r24, Y+1	; 0x01
-  10:	28 2f       	mov	r18, r24
-	GPIO_setupPinDirection(LEDS_PORT_CONNECTION, GREEN_LED, PIN_OUTPUT);
-  12:	30 e0       	ldi	r19, 0x00	; 0
-  14:	3b 83       	std	Y+3, r19	; 0x03
-  16:	2a 83       	std	Y+2, r18	; 0x02
-  18:	8a 81       	ldd	r24, Y+2	; 0x02
-  1a:	9b 81       	ldd	r25, Y+3	; 0x03
-	GPIO_setupPinDirection(LEDS_PORT_CONNECTION, BLUE_LED, PIN_OUTPUT);
-  1c:	81 30       	cpi	r24, 0x01	; 1
-  1e:	91 05       	cpc	r25, r1
-  20:	01 f0       	breq	.+0      	; 0x22 <LED_on+0x22>
-  22:	2a 81       	ldd	r18, Y+2	; 0x02
-  24:	3b 81       	ldd	r19, Y+3	; 0x03
-
-#ifdef CONNECTION_POSITIVE_LOGIC
-	GPIO_writePin(LEDS_PORT_CONNECTION, RED_LED, LOGIC_LOW);
-  26:	22 30       	cpi	r18, 0x02	; 2
-  28:	31 05       	cpc	r19, r1
-  2a:	01 f0       	breq	.+0      	; 0x2c <LED_on+0x2c>
-  2c:	8a 81       	ldd	r24, Y+2	; 0x02
-  2e:	9b 81       	ldd	r25, Y+3	; 0x03
-	GPIO_writePin(LEDS_PORT_CONNECTION, GREEN_LED, LOGIC_LOW);
-  30:	00 97       	sbiw	r24, 0x00	; 0
-  32:	01 f4       	brne	.+0      	; 0x34 <LED_on+0x34>
-  34:	81 e0       	ldi	r24, 0x01	; 1
-  36:	65 e0       	ldi	r22, 0x05	; 5
-  38:	41 e0       	ldi	r20, 0x01	; 1
-	GPIO_writePin(LEDS_PORT_CONNECTION, BLUE_LED, LOGIC_LOW);
-  3a:	0e 94 00 00 	call	0	; 0x0 <LED_on>
-  3e:	00 c0       	rjmp	.+0      	; 0x40 <LED_on+0x40>
-  40:	81 e0       	ldi	r24, 0x01	; 1
-  42:	66 e0       	ldi	r22, 0x06	; 6
-#else
-	GPIO_writePin(LEDS_PORT_CONNECTION, RED_LED, LOGIC_HIGH);
-	GPIO_writePin(LEDS_PORT_CONNECTION, GREEN_LED, LOGIC_HIGH);
-	GPIO_writePin(LEDS_PORT_CONNECTION, BLUE_LED, LOGIC_HIGH);
-#endif
-}
-  44:	41 e0       	ldi	r20, 0x01	; 1
-  46:	0e 94 00 00 	call	0	; 0x0 <LED_on>
-  4a:	00 c0       	rjmp	.+0      	; 0x4c <LED_on+0x4c>
-  4c:	81 e0       	ldi	r24, 0x01	; 1
-  4e:	67 e0       	ldi	r22, 0x07	; 7
-  50:	41 e0       	ldi	r20, 0x01	; 1
-  52:	0e 94 00 00 	call	0	; 0x0 <LED_on>
-  56:	0f 90       	pop	r0
-  58:	0f 90       	pop	r0
-  5a:	0f 90       	pop	r0
-  5c:	cf 91       	pop	r28
-  5e:	df 91       	pop	r29
-  60:	08 95       	ret
-
-Disassembly of section .text.LED_off:
-
-00000000 <LED_off>:
- * Make all of them output pins.
- * If the connection is POSITIVE LOGIC, put logic zero at the beginning.
- * Else, put logic one at the beginning (NEGATIVE LOGIC CONNECTION).
- */
-void LEDS_init(void)
-{
-   0:	df 93       	push	r29
-   2:	cf 93       	push	r28
-   4:	00 d0       	rcall	.+0      	; 0x6 <LED_off+0x6>
-   6:	0f 92       	push	r0
-	GPIO_setupPinDirection(LEDS_PORT_CONNECTION, RED_LED, PIN_OUTPUT);
-   8:	cd b7       	in	r28, 0x3d	; 61
-   a:	de b7       	in	r29, 0x3e	; 62
-   c:	89 83       	std	Y+1, r24	; 0x01
-   e:	89 81       	ldd	r24, Y+1	; 0x01
-  10:	28 2f       	mov	r18, r24
-	GPIO_setupPinDirection(LEDS_PORT_CONNECTION, GREEN_LED, PIN_OUTPUT);
-  12:	30 e0       	ldi	r19, 0x00	; 0
-  14:	3b 83       	std	Y+3, r19	; 0x03
-  16:	2a 83       	std	Y+2, r18	; 0x02
-  18:	8a 81       	ldd	r24, Y+2	; 0x02
-  1a:	9b 81       	ldd	r25, Y+3	; 0x03
-	GPIO_setupPinDirection(LEDS_PORT_CONNECTION, BLUE_LED, PIN_OUTPUT);
-  1c:	81 30       	cpi	r24, 0x01	; 1
-  1e:	91 05       	cpc	r25, r1
-  20:	01 f0       	breq	.+0      	; 0x22 <LED_off+0x22>
-  22:	2a 81       	ldd	r18, Y+2	; 0x02
-  24:	3b 81       	ldd	r19, Y+3	; 0x03
-
-#ifdef CONNECTION_POSITIVE_LOGIC
-	GPIO_writePin(LEDS_PORT_CONNECTION, RED_LED, LOGIC_LOW);
-  26:	22 30       	cpi	r18, 0x02	; 2
-  28:	31 05       	cpc	r19, r1
-  2a:	01 f0       	breq	.+0      	; 0x2c <LED_off+0x2c>
-  2c:	8a 81       	ldd	r24, Y+2	; 0x02
-  2e:	9b 81       	ldd	r25, Y+3	; 0x03
-	GPIO_writePin(LEDS_PORT_CONNECTION, GREEN_LED, LOGIC_LOW);
-  30:	00 97       	sbiw	r24, 0x00	; 0
-  32:	01 f4       	brne	.+0      	; 0x34 <LED_off+0x34>
-  34:	81 e0       	ldi	r24, 0x01	; 1
-  36:	65 e0       	ldi	r22, 0x05	; 5
-  38:	40 e0       	ldi	r20, 0x00	; 0
-	GPIO_writePin(LEDS_PORT_CONNECTION, BLUE_LED, LOGIC_LOW);
-  3a:	0e 94 00 00 	call	0	; 0x0 <LED_off>
-  3e:	00 c0       	rjmp	.+0      	; 0x40 <LED_off+0x40>
-  40:	81 e0       	ldi	r24, 0x01	; 1
-  42:	66 e0       	ldi	r22, 0x06	; 6
-#else
-	GPIO_writePin(LEDS_PORT_CONNECTION, RED_LED, LOGIC_HIGH);
-	GPIO_writePin(LEDS_PORT_CONNECTION, GREEN_LED, LOGIC_HIGH);
-	GPIO_writePin(LEDS_PORT_CONNECTION, BLUE_LED, LOGIC_HIGH);
-#endif
-}
-  44:	40 e0       	ldi	r20, 0x00	; 0
-  46:	0e 94 00 00 	call	0	; 0x0 <LED_off>
-  4a:	00 c0       	rjmp	.+0      	; 0x4c <LED_off+0x4c>
-  4c:	81 e0       	ldi	r24, 0x01	; 1
-  4e:	67 e0       	ldi	r22, 0x07	; 7
-  50:	40 e0       	ldi	r20, 0x00	; 0
-  52:	0e 94 00 00 	call	0	; 0x0 <LED_off>
-  56:	0f 90       	pop	r0
-  58:	0f 90       	pop	r0
-  5a:	0f 90       	pop	r0
-  5c:	cf 91       	pop	r28
-  5e:	df 91       	pop	r29
-  60:	08 95       	ret
-
 lm35_sensor.o:     file format elf32-avr
 
 Sections:
@@ -3780,6 +3967,222 @@ void DcMotor_Init(void)
   86:	df 91       	pop	r29
   88:	08 95       	ret
 
+three_leds.o:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  00000034  2**0
+                  ALLOC
+  3 .stab         00000504  00000000  00000000  00000034  2**2
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+  4 .stabstr      000008b8  00000000  00000000  00000538  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .text.LEDS_init 0000004a  00000000  00000000  00000df0  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  6 .text.LED_on  00000062  00000000  00000000  00000e3a  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  7 .text.LED_off 00000062  00000000  00000000  00000e9c  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+
+Disassembly of section .text.LEDS_init:
+
+00000000 <LEDS_init>:
+ * Make all of them output pins.
+ * If the connection is POSITIVE LOGIC, put logic zero at the beginning.
+ * Else, put logic one at the beginning (NEGATIVE LOGIC CONNECTION).
+ */
+void LEDS_init(void)
+{
+   0:	df 93       	push	r29
+   2:	cf 93       	push	r28
+   4:	cd b7       	in	r28, 0x3d	; 61
+   6:	de b7       	in	r29, 0x3e	; 62
+	GPIO_setupPinDirection(LEDS_PORT_CONNECTION, RED_LED, PIN_OUTPUT);
+   8:	81 e0       	ldi	r24, 0x01	; 1
+   a:	65 e0       	ldi	r22, 0x05	; 5
+   c:	41 e0       	ldi	r20, 0x01	; 1
+   e:	0e 94 00 00 	call	0	; 0x0 <LEDS_init>
+	GPIO_setupPinDirection(LEDS_PORT_CONNECTION, GREEN_LED, PIN_OUTPUT);
+  12:	81 e0       	ldi	r24, 0x01	; 1
+  14:	66 e0       	ldi	r22, 0x06	; 6
+  16:	41 e0       	ldi	r20, 0x01	; 1
+  18:	0e 94 00 00 	call	0	; 0x0 <LEDS_init>
+	GPIO_setupPinDirection(LEDS_PORT_CONNECTION, BLUE_LED, PIN_OUTPUT);
+  1c:	81 e0       	ldi	r24, 0x01	; 1
+  1e:	67 e0       	ldi	r22, 0x07	; 7
+  20:	41 e0       	ldi	r20, 0x01	; 1
+  22:	0e 94 00 00 	call	0	; 0x0 <LEDS_init>
+
+#ifdef CONNECTION_POSITIVE_LOGIC
+	GPIO_writePin(LEDS_PORT_CONNECTION, RED_LED, LOGIC_LOW);
+  26:	81 e0       	ldi	r24, 0x01	; 1
+  28:	65 e0       	ldi	r22, 0x05	; 5
+  2a:	40 e0       	ldi	r20, 0x00	; 0
+  2c:	0e 94 00 00 	call	0	; 0x0 <LEDS_init>
+	GPIO_writePin(LEDS_PORT_CONNECTION, GREEN_LED, LOGIC_LOW);
+  30:	81 e0       	ldi	r24, 0x01	; 1
+  32:	66 e0       	ldi	r22, 0x06	; 6
+  34:	40 e0       	ldi	r20, 0x00	; 0
+  36:	0e 94 00 00 	call	0	; 0x0 <LEDS_init>
+	GPIO_writePin(LEDS_PORT_CONNECTION, BLUE_LED, LOGIC_LOW);
+  3a:	81 e0       	ldi	r24, 0x01	; 1
+  3c:	67 e0       	ldi	r22, 0x07	; 7
+  3e:	40 e0       	ldi	r20, 0x00	; 0
+  40:	0e 94 00 00 	call	0	; 0x0 <LEDS_init>
+#else
+	GPIO_writePin(LEDS_PORT_CONNECTION, RED_LED, LOGIC_HIGH);
+	GPIO_writePin(LEDS_PORT_CONNECTION, GREEN_LED, LOGIC_HIGH);
+	GPIO_writePin(LEDS_PORT_CONNECTION, BLUE_LED, LOGIC_HIGH);
+#endif
+}
+  44:	cf 91       	pop	r28
+  46:	df 91       	pop	r29
+  48:	08 95       	ret
+
+Disassembly of section .text.LED_on:
+
+00000000 <LED_on>:
+ * Make all of them output pins.
+ * If the connection is POSITIVE LOGIC, put logic zero at the beginning.
+ * Else, put logic one at the beginning (NEGATIVE LOGIC CONNECTION).
+ */
+void LEDS_init(void)
+{
+   0:	df 93       	push	r29
+   2:	cf 93       	push	r28
+   4:	00 d0       	rcall	.+0      	; 0x6 <LED_on+0x6>
+   6:	0f 92       	push	r0
+	GPIO_setupPinDirection(LEDS_PORT_CONNECTION, RED_LED, PIN_OUTPUT);
+   8:	cd b7       	in	r28, 0x3d	; 61
+   a:	de b7       	in	r29, 0x3e	; 62
+   c:	89 83       	std	Y+1, r24	; 0x01
+   e:	89 81       	ldd	r24, Y+1	; 0x01
+  10:	28 2f       	mov	r18, r24
+	GPIO_setupPinDirection(LEDS_PORT_CONNECTION, GREEN_LED, PIN_OUTPUT);
+  12:	30 e0       	ldi	r19, 0x00	; 0
+  14:	3b 83       	std	Y+3, r19	; 0x03
+  16:	2a 83       	std	Y+2, r18	; 0x02
+  18:	8a 81       	ldd	r24, Y+2	; 0x02
+  1a:	9b 81       	ldd	r25, Y+3	; 0x03
+	GPIO_setupPinDirection(LEDS_PORT_CONNECTION, BLUE_LED, PIN_OUTPUT);
+  1c:	81 30       	cpi	r24, 0x01	; 1
+  1e:	91 05       	cpc	r25, r1
+  20:	01 f0       	breq	.+0      	; 0x22 <LED_on+0x22>
+  22:	2a 81       	ldd	r18, Y+2	; 0x02
+  24:	3b 81       	ldd	r19, Y+3	; 0x03
+
+#ifdef CONNECTION_POSITIVE_LOGIC
+	GPIO_writePin(LEDS_PORT_CONNECTION, RED_LED, LOGIC_LOW);
+  26:	22 30       	cpi	r18, 0x02	; 2
+  28:	31 05       	cpc	r19, r1
+  2a:	01 f0       	breq	.+0      	; 0x2c <LED_on+0x2c>
+  2c:	8a 81       	ldd	r24, Y+2	; 0x02
+  2e:	9b 81       	ldd	r25, Y+3	; 0x03
+	GPIO_writePin(LEDS_PORT_CONNECTION, GREEN_LED, LOGIC_LOW);
+  30:	00 97       	sbiw	r24, 0x00	; 0
+  32:	01 f4       	brne	.+0      	; 0x34 <LED_on+0x34>
+  34:	81 e0       	ldi	r24, 0x01	; 1
+  36:	65 e0       	ldi	r22, 0x05	; 5
+  38:	41 e0       	ldi	r20, 0x01	; 1
+	GPIO_writePin(LEDS_PORT_CONNECTION, BLUE_LED, LOGIC_LOW);
+  3a:	0e 94 00 00 	call	0	; 0x0 <LED_on>
+  3e:	00 c0       	rjmp	.+0      	; 0x40 <LED_on+0x40>
+  40:	81 e0       	ldi	r24, 0x01	; 1
+  42:	66 e0       	ldi	r22, 0x06	; 6
+#else
+	GPIO_writePin(LEDS_PORT_CONNECTION, RED_LED, LOGIC_HIGH);
+	GPIO_writePin(LEDS_PORT_CONNECTION, GREEN_LED, LOGIC_HIGH);
+	GPIO_writePin(LEDS_PORT_CONNECTION, BLUE_LED, LOGIC_HIGH);
+#endif
+}
+  44:	41 e0       	ldi	r20, 0x01	; 1
+  46:	0e 94 00 00 	call	0	; 0x0 <LED_on>
+  4a:	00 c0       	rjmp	.+0      	; 0x4c <LED_on+0x4c>
+  4c:	81 e0       	ldi	r24, 0x01	; 1
+  4e:	67 e0       	ldi	r22, 0x07	; 7
+  50:	41 e0       	ldi	r20, 0x01	; 1
+  52:	0e 94 00 00 	call	0	; 0x0 <LED_on>
+  56:	0f 90       	pop	r0
+  58:	0f 90       	pop	r0
+  5a:	0f 90       	pop	r0
+  5c:	cf 91       	pop	r28
+  5e:	df 91       	pop	r29
+  60:	08 95       	ret
+
+Disassembly of section .text.LED_off:
+
+00000000 <LED_off>:
+ * Make all of them output pins.
+ * If the connection is POSITIVE LOGIC, put logic zero at the beginning.
+ * Else, put logic one at the beginning (NEGATIVE LOGIC CONNECTION).
+ */
+void LEDS_init(void)
+{
+   0:	df 93       	push	r29
+   2:	cf 93       	push	r28
+   4:	00 d0       	rcall	.+0      	; 0x6 <LED_off+0x6>
+   6:	0f 92       	push	r0
+	GPIO_setupPinDirection(LEDS_PORT_CONNECTION, RED_LED, PIN_OUTPUT);
+   8:	cd b7       	in	r28, 0x3d	; 61
+   a:	de b7       	in	r29, 0x3e	; 62
+   c:	89 83       	std	Y+1, r24	; 0x01
+   e:	89 81       	ldd	r24, Y+1	; 0x01
+  10:	28 2f       	mov	r18, r24
+	GPIO_setupPinDirection(LEDS_PORT_CONNECTION, GREEN_LED, PIN_OUTPUT);
+  12:	30 e0       	ldi	r19, 0x00	; 0
+  14:	3b 83       	std	Y+3, r19	; 0x03
+  16:	2a 83       	std	Y+2, r18	; 0x02
+  18:	8a 81       	ldd	r24, Y+2	; 0x02
+  1a:	9b 81       	ldd	r25, Y+3	; 0x03
+	GPIO_setupPinDirection(LEDS_PORT_CONNECTION, BLUE_LED, PIN_OUTPUT);
+  1c:	81 30       	cpi	r24, 0x01	; 1
+  1e:	91 05       	cpc	r25, r1
+  20:	01 f0       	breq	.+0      	; 0x22 <LED_off+0x22>
+  22:	2a 81       	ldd	r18, Y+2	; 0x02
+  24:	3b 81       	ldd	r19, Y+3	; 0x03
+
+#ifdef CONNECTION_POSITIVE_LOGIC
+	GPIO_writePin(LEDS_PORT_CONNECTION, RED_LED, LOGIC_LOW);
+  26:	22 30       	cpi	r18, 0x02	; 2
+  28:	31 05       	cpc	r19, r1
+  2a:	01 f0       	breq	.+0      	; 0x2c <LED_off+0x2c>
+  2c:	8a 81       	ldd	r24, Y+2	; 0x02
+  2e:	9b 81       	ldd	r25, Y+3	; 0x03
+	GPIO_writePin(LEDS_PORT_CONNECTION, GREEN_LED, LOGIC_LOW);
+  30:	00 97       	sbiw	r24, 0x00	; 0
+  32:	01 f4       	brne	.+0      	; 0x34 <LED_off+0x34>
+  34:	81 e0       	ldi	r24, 0x01	; 1
+  36:	65 e0       	ldi	r22, 0x05	; 5
+  38:	40 e0       	ldi	r20, 0x00	; 0
+	GPIO_writePin(LEDS_PORT_CONNECTION, BLUE_LED, LOGIC_LOW);
+  3a:	0e 94 00 00 	call	0	; 0x0 <LED_off>
+  3e:	00 c0       	rjmp	.+0      	; 0x40 <LED_off+0x40>
+  40:	81 e0       	ldi	r24, 0x01	; 1
+  42:	66 e0       	ldi	r22, 0x06	; 6
+#else
+	GPIO_writePin(LEDS_PORT_CONNECTION, RED_LED, LOGIC_HIGH);
+	GPIO_writePin(LEDS_PORT_CONNECTION, GREEN_LED, LOGIC_HIGH);
+	GPIO_writePin(LEDS_PORT_CONNECTION, BLUE_LED, LOGIC_HIGH);
+#endif
+}
+  44:	40 e0       	ldi	r20, 0x00	; 0
+  46:	0e 94 00 00 	call	0	; 0x0 <LED_off>
+  4a:	00 c0       	rjmp	.+0      	; 0x4c <LED_off+0x4c>
+  4c:	81 e0       	ldi	r24, 0x01	; 1
+  4e:	67 e0       	ldi	r22, 0x07	; 7
+  50:	40 e0       	ldi	r20, 0x00	; 0
+  52:	0e 94 00 00 	call	0	; 0x0 <LED_off>
+  56:	0f 90       	pop	r0
+  58:	0f 90       	pop	r0
+  5a:	0f 90       	pop	r0
+  5c:	cf 91       	pop	r28
+  5e:	df 91       	pop	r29
+  60:	08 95       	ret
+
 ultrasonic_sensor.o:     file format elf32-avr
 
 Sections:
@@ -3821,29 +4224,29 @@ void Ultrasonic_init(void)
    4:	00 d0       	rcall	.+0      	; 0x6 <Ultrasonic_init+0x6>
    6:	cd b7       	in	r28, 0x3d	; 61
    8:	de b7       	in	r29, 0x3e	; 62
+	/* Set up pin direction for trigger pin as output. */
+	GPIO_setupPinDirection(TRIGGER_PORT_CONNECTION, TRIGGER_PIN, PIN_OUTPUT);
+   a:	83 e0       	ldi	r24, 0x03	; 3
+   c:	67 e0       	ldi	r22, 0x07	; 7
+   e:	41 e0       	ldi	r20, 0x01	; 1
+  10:	0e 94 00 00 	call	0	; 0x0 <Ultrasonic_init>
 	/*
 	 * Set up ICU Configuration.
 	 * Initialize ICU.
 	 * Set call back function.
 	 * */
 	ICU_ConfigType ICU_Configurations = {F_CPU_8, RAISING};
-   a:	82 e0       	ldi	r24, 0x02	; 2
-   c:	89 83       	std	Y+1, r24	; 0x01
-   e:	81 e0       	ldi	r24, 0x01	; 1
-  10:	8a 83       	std	Y+2, r24	; 0x02
+  14:	82 e0       	ldi	r24, 0x02	; 2
+  16:	89 83       	std	Y+1, r24	; 0x01
+  18:	81 e0       	ldi	r24, 0x01	; 1
+  1a:	8a 83       	std	Y+2, r24	; 0x02
 	ICU_init(&ICU_Configurations);
-  12:	ce 01       	movw	r24, r28
-  14:	01 96       	adiw	r24, 0x01	; 1
-  16:	0e 94 00 00 	call	0	; 0x0 <Ultrasonic_init>
+  1c:	ce 01       	movw	r24, r28
+  1e:	01 96       	adiw	r24, 0x01	; 1
+  20:	0e 94 00 00 	call	0	; 0x0 <Ultrasonic_init>
 	ICU_setCallBack(Ultrasonic_edgeProcessing);
-  1a:	80 e0       	ldi	r24, 0x00	; 0
-  1c:	90 e0       	ldi	r25, 0x00	; 0
-  1e:	0e 94 00 00 	call	0	; 0x0 <Ultrasonic_init>
-	/* Set up pin direction for trigger pin as output. */
-	GPIO_setupPinDirection(TRIGGER_PORT_CONNECTION, TRIGGER_PIN, PIN_OUTPUT);
-  22:	83 e0       	ldi	r24, 0x03	; 3
-  24:	67 e0       	ldi	r22, 0x07	; 7
-  26:	41 e0       	ldi	r20, 0x01	; 1
+  24:	80 e0       	ldi	r24, 0x00	; 0
+  26:	90 e0       	ldi	r25, 0x00	; 0
   28:	0e 94 00 00 	call	0	; 0x0 <Ultrasonic_init>
 }
   2c:	0f 90       	pop	r0
@@ -3866,28 +4269,28 @@ void Ultrasonic_init(void)
    4:	cd b7       	in	r28, 0x3d	; 61
    6:	de b7       	in	r29, 0x3e	; 62
    8:	68 97       	sbiw	r28, 0x18	; 24
+	/* Set up pin direction for trigger pin as output. */
+	GPIO_setupPinDirection(TRIGGER_PORT_CONNECTION, TRIGGER_PIN, PIN_OUTPUT);
+   a:	0f b6       	in	r0, 0x3f	; 63
+   c:	f8 94       	cli
+   e:	de bf       	out	0x3e, r29	; 62
+  10:	0f be       	out	0x3f, r0	; 63
+  12:	cd bf       	out	0x3d, r28	; 61
 	/*
 	 * Set up ICU Configuration.
 	 * Initialize ICU.
 	 * Set call back function.
 	 * */
 	ICU_ConfigType ICU_Configurations = {F_CPU_8, RAISING};
-   a:	0f b6       	in	r0, 0x3f	; 63
-   c:	f8 94       	cli
-   e:	de bf       	out	0x3e, r29	; 62
-  10:	0f be       	out	0x3f, r0	; 63
-	ICU_init(&ICU_Configurations);
-  12:	cd bf       	out	0x3d, r28	; 61
   14:	83 e0       	ldi	r24, 0x03	; 3
   16:	67 e0       	ldi	r22, 0x07	; 7
   18:	41 e0       	ldi	r20, 0x01	; 1
-	ICU_setCallBack(Ultrasonic_edgeProcessing);
   1a:	0e 94 00 00 	call	0	; 0x0 <Ultrasonic_Trigger>
+	ICU_init(&ICU_Configurations);
   1e:	80 e0       	ldi	r24, 0x00	; 0
   20:	90 e0       	ldi	r25, 0x00	; 0
-	/* Set up pin direction for trigger pin as output. */
-	GPIO_setupPinDirection(TRIGGER_PORT_CONNECTION, TRIGGER_PIN, PIN_OUTPUT);
   22:	a0 e2       	ldi	r26, 0x20	; 32
+	ICU_setCallBack(Ultrasonic_edgeProcessing);
   24:	b1 e4       	ldi	r27, 0x41	; 65
   26:	8d 8b       	std	Y+21, r24	; 0x15
   28:	9e 8b       	std	Y+22, r25	; 0x16
@@ -4093,25 +4496,25 @@ void Ultrasonic_init(void)
    4:	cd b7       	in	r28, 0x3d	; 61
    6:	de b7       	in	r29, 0x3e	; 62
    8:	0e 94 00 00 	call	0	; 0x0 <Ultrasonic_readDistance>
+	/* Set up pin direction for trigger pin as output. */
+	GPIO_setupPinDirection(TRIGGER_PORT_CONNECTION, TRIGGER_PIN, PIN_OUTPUT);
+   c:	80 91 00 00 	lds	r24, 0x0000
+  10:	90 91 00 00 	lds	r25, 0x0000
 	/*
 	 * Set up ICU Configuration.
 	 * Initialize ICU.
 	 * Set call back function.
 	 * */
 	ICU_ConfigType ICU_Configurations = {F_CPU_8, RAISING};
-   c:	80 91 00 00 	lds	r24, 0x0000
-  10:	90 91 00 00 	lds	r25, 0x0000
-	ICU_init(&ICU_Configurations);
   14:	cc 01       	movw	r24, r24
   16:	a0 e0       	ldi	r26, 0x00	; 0
   18:	b0 e0       	ldi	r27, 0x00	; 0
-	ICU_setCallBack(Ultrasonic_edgeProcessing);
   1a:	bc 01       	movw	r22, r24
+	ICU_init(&ICU_Configurations);
   1c:	cd 01       	movw	r24, r26
   1e:	0e 94 00 00 	call	0	; 0x0 <Ultrasonic_readDistance>
-	/* Set up pin direction for trigger pin as output. */
-	GPIO_setupPinDirection(TRIGGER_PORT_CONNECTION, TRIGGER_PIN, PIN_OUTPUT);
   22:	dc 01       	movw	r26, r24
+	ICU_setCallBack(Ultrasonic_edgeProcessing);
   24:	cb 01       	movw	r24, r22
   26:	bc 01       	movw	r22, r24
   28:	cd 01       	movw	r24, r26
@@ -4155,24 +4558,24 @@ void Ultrasonic_init(void)
    4:	cd b7       	in	r28, 0x3d	; 61
    6:	de b7       	in	r29, 0x3e	; 62
    8:	80 91 00 00 	lds	r24, 0x0000
+	/* Set up pin direction for trigger pin as output. */
+	GPIO_setupPinDirection(TRIGGER_PORT_CONNECTION, TRIGGER_PIN, PIN_OUTPUT);
+   c:	8f 5f       	subi	r24, 0xFF	; 255
+   e:	80 93 00 00 	sts	0x0000, r24
+  12:	80 91 00 00 	lds	r24, 0x0000
 	/*
 	 * Set up ICU Configuration.
 	 * Initialize ICU.
 	 * Set call back function.
 	 * */
 	ICU_ConfigType ICU_Configurations = {F_CPU_8, RAISING};
-   c:	8f 5f       	subi	r24, 0xFF	; 255
-   e:	80 93 00 00 	sts	0x0000, r24
-	ICU_init(&ICU_Configurations);
-  12:	80 91 00 00 	lds	r24, 0x0000
   16:	81 30       	cpi	r24, 0x01	; 1
   18:	01 f4       	brne	.+0      	; 0x1a <Ultrasonic_edgeProcessing+0x1a>
-	ICU_setCallBack(Ultrasonic_edgeProcessing);
   1a:	0e 94 00 00 	call	0	; 0x0 <Ultrasonic_edgeProcessing>
+	ICU_init(&ICU_Configurations);
   1e:	80 e0       	ldi	r24, 0x00	; 0
   20:	0e 94 00 00 	call	0	; 0x0 <Ultrasonic_edgeProcessing>
-	/* Set up pin direction for trigger pin as output. */
-	GPIO_setupPinDirection(TRIGGER_PORT_CONNECTION, TRIGGER_PIN, PIN_OUTPUT);
+	ICU_setCallBack(Ultrasonic_edgeProcessing);
   24:	00 c0       	rjmp	.+0      	; 0x26 <Ultrasonic_edgeProcessing+0x26>
   26:	80 91 00 00 	lds	r24, 0x0000
   2a:	82 30       	cpi	r24, 0x02	; 2

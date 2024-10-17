@@ -8,9 +8,9 @@ C_SRCS += \
 ../HAL/flame_sensor.c \
 ../HAL/lcd.c \
 ../HAL/ldr_sensor.c \
-../HAL/leds.c \
 ../HAL/lm35_sensor.c \
 ../HAL/motor.c \
+../HAL/three_leds.c \
 ../HAL/ultrasonic_sensor.c 
 
 OBJS += \
@@ -18,9 +18,9 @@ OBJS += \
 ./HAL/flame_sensor.o \
 ./HAL/lcd.o \
 ./HAL/ldr_sensor.o \
-./HAL/leds.o \
 ./HAL/lm35_sensor.o \
 ./HAL/motor.o \
+./HAL/three_leds.o \
 ./HAL/ultrasonic_sensor.o 
 
 C_DEPS += \
@@ -28,9 +28,9 @@ C_DEPS += \
 ./HAL/flame_sensor.d \
 ./HAL/lcd.d \
 ./HAL/ldr_sensor.d \
-./HAL/leds.d \
 ./HAL/lm35_sensor.d \
 ./HAL/motor.d \
+./HAL/three_leds.d \
 ./HAL/ultrasonic_sensor.d 
 
 

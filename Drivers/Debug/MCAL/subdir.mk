@@ -7,19 +7,22 @@ C_SRCS += \
 ../MCAL/adc.c \
 ../MCAL/gpio.c \
 ../MCAL/icu.c \
-../MCAL/pwm.c 
+../MCAL/pwm.c \
+../MCAL/uart.c 
 
 OBJS += \
 ./MCAL/adc.o \
 ./MCAL/gpio.o \
 ./MCAL/icu.o \
-./MCAL/pwm.o 
+./MCAL/pwm.o \
+./MCAL/uart.o 
 
 C_DEPS += \
 ./MCAL/adc.d \
 ./MCAL/gpio.d \
 ./MCAL/icu.d \
-./MCAL/pwm.d 
+./MCAL/pwm.d \
+./MCAL/uart.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
