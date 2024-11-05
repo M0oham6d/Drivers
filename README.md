@@ -31,7 +31,6 @@ This repository contains drivers for the AVR ATmega32 microcontroller, organized
 ## Features
 
 - **Modular Design**: Each driver is designed as a separate module for easy integration and maintenance.
-- **Documentation**: Comprehensive documentation for each driver, including usage examples.
 - **Compatibility**: Designed to be compatible with various development environments and tools.
 
 ## Getting Started
@@ -41,5 +40,3 @@ This repository contains drivers for the AVR ATmega32 microcontroller, organized
     ```bash
     git clone https://github.com/M0oham6d/Drivers.git
     ```
-
-2. **Follow the documentation** in each module’s folder to integrate and use the drivers in your projects.
