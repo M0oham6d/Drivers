@@ -37,7 +37,8 @@ void DcMotor_Init(void)
  */
 void DcMotor_Rotate(DcMotor_State state, uint8 speed)
 {
-	PWM_Timer0_Start(speed);
+	Timer_ConfigType configrations = {NON_INVERTING, F_CPU_CLOCK, speed};
+	PWM_Timer0_Start(&configrations);
 
 	switch (state)
 	{
